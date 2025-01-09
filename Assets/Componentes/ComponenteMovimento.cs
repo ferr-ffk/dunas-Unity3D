@@ -33,7 +33,7 @@ public class ComponenteMovimento : MonoBehaviour
         objeto.transform.Translate(direcaoLerp *  _velocidade * Time.deltaTime);
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
-        velocidadeAtual = objeto.transform.position;
+        velocidadeAtual = velocidadeAlvo;
     }
 
     /// <summary>
