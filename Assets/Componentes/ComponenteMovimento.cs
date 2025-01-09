@@ -40,10 +40,10 @@ public class ComponenteMovimento : MonoBehaviour
     /// Usa a velocidade de pulo do componente para movimentar o objeto na direção Y+.
     /// </summary>
     /// <param name="objeto"></param>
-    public void Pular(GameObject objeto)
+    public void Pular(GameObject objeto)    
     {
-        Vector3 direcao = new(0, _velocidadePulo);
+        Vector3 direcao = new(0, _velocidadePulo, 0);
 
-        objeto.transform.Translate(direcao * _velocidadePulo * Time.deltaTime);
+        objeto.GetComponent<Rigidbody>().AddForce(direcao, ForceMode.Impulse);
     }
 }
