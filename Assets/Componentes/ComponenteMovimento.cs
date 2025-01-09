@@ -11,7 +11,7 @@ public class ComponenteMovimento : MonoBehaviour
     [SerializeField, Tooltip("A aceleração do objeto, por padrão 1.")]
     private float _aceleracao = 1.0f;
 
-    private Vector3 velocidadeAtual = Vector3.zero;
+    private Vector3 direcaoAtual = Vector3.zero;
 
     /// <summary>
     /// Movimenta o objeto passado em uma direção dada.
@@ -21,13 +21,13 @@ public class ComponenteMovimento : MonoBehaviour
     public void Movimentar(GameObject objeto, Vector3 direcao)
     {
         // Calcula a direção desejada de movimento
-        Vector3 velocidadeAlvo = direcao * _velocidade;
+        Vector3 direcaoDesejada = direcao * _velocidade;
 
         // Calcula o valor da aceleração para ser utilizada no Lerp
         float valorAceleracao = 1 - Mathf.Exp(-_aceleracao * Time.deltaTime);
 
         // Calcula o Lerp, que é basicamente uma forma de deixar mais suave o movimento com aceleração
-        Vector3 direcaoLerp = Vector3.Lerp(velocidadeAtual, velocidadeAlvo, valorAceleracao);
+        Vector3 direcaoLerp = Vector3.Lerp(direcaoAtual, direcaoDesejada, valorAceleracao);
 
         Vector3 direcaoCalculada = direcaoLerp *  _velocidade * Time.deltaTime;
 
@@ -35,7 +35,7 @@ public class ComponenteMovimento : MonoBehaviour
         objeto.transform.Translate(direcaoCalculada);
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
-        velocidadeAtual = velocidadeAlvo;
+        direcaoAtual = direcaoDesejada;
     }
 
     /// <summary>
