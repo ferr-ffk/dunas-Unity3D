@@ -39,10 +39,11 @@ public class Jogador : MonoBehaviour
         // Cria um vetor 3D para movimentar apenas no x e z (sendo Y a vertical)
         Vector3 direcao = new(direcaoJoystick.x, 0, direcaoJoystick.y);
 
-        Quaternion forward = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
+        // Utiliza a rotação que a câmera está apontando, e usa para que o jogador se movimente de acordo com ela
+        Quaternion rotacaoCameraApontando = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
 
         // Utiliza o método do componente de movimento e movimenta o jogador
-        _componenteMovimento.Movimentar(gameObject, direcao, forward);
+        _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
 
