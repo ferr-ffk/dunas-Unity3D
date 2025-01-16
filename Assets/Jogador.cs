@@ -12,10 +12,15 @@ public class Jogador : MonoBehaviour
     [SerializeField]
     private InputActionReference _puloJogadorReferencia;
 
+    [SerializeField]
+    private GameObject _pivoCamera;
+
+    private GameObject _camera;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -34,8 +39,10 @@ public class Jogador : MonoBehaviour
         // Cria um vetor 3D para movimentar apenas no x e z (sendo Y a vertical)
         Vector3 direcao = new(direcaoJoystick.x, 0, direcaoJoystick.y);
 
+        Quaternion forward = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
+
         // Utiliza o método do componente de movimento e movimenta o jogador
-        _componenteMovimento.Movimentar(gameObject, direcao);
+        _componenteMovimento.Movimentar(gameObject, direcao, forward);
 
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
 
