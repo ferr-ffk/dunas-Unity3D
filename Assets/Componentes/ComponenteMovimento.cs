@@ -13,15 +13,27 @@ public class ComponenteMovimento : MonoBehaviour
 
     private Vector3 velocidadeAtual = Vector3.zero;
 
+    private GameObject _camera;
+
+    private void Start()
+    {
+        // Congela a rotação do objeto para que ele não caia kkk
+        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+    }
+
     /// <summary>
     /// Movimenta o objeto passado em uma direção dada.
     /// </summary>
     /// <param name="objeto">O GameObject a ser movimentado</param>
     /// <param name="direcao">O Vector3 representando a direção</param>
-    public void Movimentar(GameObject objeto, Vector3 direcao)
+    /// <param name="forward">O vetor representando a frente do movimento, útil caso o componente seja do jogador, e sua rotação muda constantemente por conta da câmera</param>
+    public void Movimentar(GameObject objeto, Vector3 direcao, Quaternion forward = default)
     {
+        // Transforma o vetor de movimento com base na direção dele (se esta existir), para que o movimento esteja sempre alinhado com a câmera
+        Vector3 direcaoMovimento = forward * direcao;
+
         // Calcula a direção desejada de movimento
-        Vector3 velocidadeAlvo = direcao * _velocidade;
+        Vector3 velocidadeAlvo = direcaoMovimento * _velocidade;
 
         // Calcula o valor da aceleração para ser utilizada no Lerp
         float valorAceleracao = 1 - Mathf.Exp(-_aceleracao * Time.deltaTime);
@@ -30,7 +42,7 @@ public class ComponenteMovimento : MonoBehaviour
         Vector3 direcaoLerp = Vector3.Lerp(velocidadeAtual, velocidadeAlvo, valorAceleracao);
 
         // Movimenta o objeto
-        objeto.transform.Translate(direcaoLerp *  _velocidade * Time.deltaTime);
+        objeto.transform.Translate(direcaoLerp * _velocidade * Time.deltaTime);
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
         velocidadeAtual = velocidadeAlvo;
