@@ -5,10 +5,10 @@ public class ComponenteMovimento : MonoBehaviour
     [SerializeField, Tooltip("A velocidade do objeto. Deve ser definida.")]
     private float _velocidade;
 
-    [SerializeField, Tooltip("A velocidade de pulo, sendo pulo o movimento em direÁ„o Y+. Deve ser definida.")]
+    [SerializeField, Tooltip("A velocidade de pulo, sendo pulo o movimento em dire√ß√£o Y+. Deve ser definida.")]
     private float _velocidadePulo;
 
-    [SerializeField, Tooltip("A aceleraÁ„o do objeto, por padr„o 1.")]
+    [SerializeField, Tooltip("A acelera√ß√£o do objeto, por padr√£o 1.")]
     private float _aceleracao = 1.0f;
 
     private Vector3 _velocidadeAtual = Vector3.zero;
@@ -19,11 +19,11 @@ public class ComponenteMovimento : MonoBehaviour
 
     private void Start()
     {
-        // Congela a rotaÁ„o do objeto para que ele n„o caia rs
+        // Congela a rota√ß√£o do objeto para que ele n√£o caia rs
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
         {
-            Debug.LogError("Rigidbody n„o encontrado!");
+            Debug.LogError("Rigidbody n√£o encontrado!");
             return;
         } else
         {
@@ -35,34 +35,34 @@ public class ComponenteMovimento : MonoBehaviour
     }
 
     /// <summary>
-    /// Movimenta o objeto passado em uma direÁ„o dada.
+    /// Movimenta o objeto passado em uma dire√ß√£o dada.
     /// </summary>
     /// <param name="objeto">O GameObject a ser movimentado</param>
-    /// <param name="direcao">O Vector3 representando a direÁ„o</param>
-    /// <param name="forward">O vetor representando a frente do movimento, ˙til caso o componente seja do jogador, e sua rotaÁ„o muda constantemente por conta da c‚mera</param>
+    /// <param name="direcao">O Vector3 representando a dire√ß√£o</param>
+    /// <param name="forward">O vetor representando a frente do movimento, √∫til caso o componente seja do jogador, e sua rota√ß√£o muda constantemente por conta da c√¢mera</param>
     public void Movimentar(GameObject objeto, Vector3 direcao, Quaternion forward = default)
     {
         if (objeto == null)
         {
-            Debug.LogError("Objeto n„o pode ser nulo!");
+            Debug.LogError("Objeto n√£o pode ser nulo!");
             return;
         }
 
-        // Transforma o vetor de movimento com base na direÁ„o dele (se esta existir), para que o movimento esteja sempre alinhado com a c‚mera
+        // Transforma o vetor de movimento com base na dire√ß√£o dele (se esta existir), para que o movimento esteja sempre alinhado com a c√¢mera
         Vector3 direcaoMovimento = forward * direcao;
 
-        // Calcula a direÁ„o desejada de movimento
+        // Calcula a dire√ß√£o desejada de movimento
         Vector3 velocidadeAlvo = direcaoMovimento * _velocidade;
 
-        // Calcula o valor da aceleraÁ„o para ser utilizada no Lerp
+        // Calcula o valor da acelera√ß√£o para ser utilizada no Lerp
         float valorAceleracao = 1 - Mathf.Exp(-_aceleracao * Time.deltaTime);
 
-        // Calcula o Lerp, que È basicamente uma forma de deixar mais suave o movimento com aceleraÁ„o
+        // Calcula o Lerp, que √© basicamente uma forma de deixar mais suave o movimento com acelera√ß√£o
         Vector3 direcaoLerp = Vector3.Lerp(_velocidadeAtual, velocidadeAlvo, valorAceleracao);
 
 
         // Movimenta o objeto
-        // Se possui o componente de CharacterController, usa ele para o movimento, caso contr·rio usa o rigid body
+        // Se possui o componente de CharacterController, usa ele para o movimento, caso contr√°rio usa o rigid body
         if (isJogador)
         {
             _characterController.Move(direcaoLerp * Time.deltaTime);
@@ -71,25 +71,25 @@ public class ComponenteMovimento : MonoBehaviour
             _rigidbody.MovePosition(direcaoLerp * Time.deltaTime);
         }
 
-        // Atualiza a vari·vel local para o valor mais recente da velocidade do objeto
+        // Atualiza a vari√°vel local para o valor mais recente da velocidade do objeto
         _velocidadeAtual = velocidadeAlvo;
     }
 
     /// <summary>
-    /// Usa a velocidade de pulo do componente para movimentar o objeto na direÁ„o Y+.
+    /// Usa a velocidade de pulo do componente para movimentar o objeto na dire√ß√£o Y+.
     /// </summary>
     /// <param name="objeto">O GameObject a ser movimentado</param>
     public void Pular(GameObject objeto)
     {
         if (objeto == null)
         {
-            Debug.LogError("Objeto n„o pode ser nulo!");
+            Debug.LogError("Objeto n√£o pode ser nulo!");
             return;
         }
 
         if (_rigidbody == null)
         {
-            Debug.LogError("Rigidbody n„o encontrado!");
+            Debug.LogError("Rigidbody n√£o encontrado!");
             return;
         }
 
