@@ -54,8 +54,6 @@ public class ComponenteMovimento : MonoBehaviour
     /// <param name="objeto"></param>
     public void Pular(GameObject objeto)    
     {
-        Vector3 direcao = new(0, _velocidadePulo, 0);
-
-        objeto.GetComponent<Rigidbody>().AddForce(direcao, ForceMode.Impulse);
+        objeto.GetComponent<Rigidbody>().AddForce(transform.up * _velocidadePulo, ForceMode.Impulse);
     }
 }
