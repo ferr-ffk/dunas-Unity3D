@@ -13,6 +13,9 @@ public class ComponenteMovimento : MonoBehaviour
 
     private Vector3 _velocidadeAtual = Vector3.zero;
     private Rigidbody _rigidbody;
+    private CharacterController _characterController;
+
+    private bool isJogador; 
 
     private void Start()
     {
@@ -22,8 +25,13 @@ public class ComponenteMovimento : MonoBehaviour
         {
             Debug.LogError("Rigidbody não encontrado!");
             return;
+        } else
+        {
+            _rigidbody.freezeRotation = true;
         }
-        _rigidbody.freezeRotation = true;
+
+        // Pega o CharacterController do objeto, caso exista
+        isJogador = TryGetComponent<CharacterController>(out _characterController);
     }
 
     /// <summary>
@@ -52,8 +60,16 @@ public class ComponenteMovimento : MonoBehaviour
         // Calcula o Lerp, que é basicamente uma forma de deixar mais suave o movimento com aceleração
         Vector3 direcaoLerp = Vector3.Lerp(_velocidadeAtual, velocidadeAlvo, valorAceleracao);
 
+
         // Movimenta o objeto
-        objeto.transform.Translate(direcaoLerp * Time.deltaTime);
+        // Se possui o componente de CharacterController, usa ele para o movimento, caso contrário usa o rigid body
+        if (isJogador)
+        {
+            _characterController.Move(direcaoLerp * Time.deltaTime);
+        } else
+        {
+            _rigidbody.MovePosition(direcaoLerp * Time.deltaTime);
+        }
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
         _velocidadeAtual = velocidadeAlvo;
