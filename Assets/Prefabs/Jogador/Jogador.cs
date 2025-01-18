@@ -46,7 +46,7 @@ public class Jogador : MonoBehaviour
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
-        bool noChao = true;
+        bool noChao = _componenteMovimento.noChao;
 
         if (botaoPularPressionado && noChao)
         {
