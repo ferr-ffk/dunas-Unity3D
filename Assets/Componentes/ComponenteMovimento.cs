@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ComponenteMovimento : MonoBehaviour
 {
+
     [SerializeField, Tooltip("A velocidade do objeto. Deve ser definida.")]
     private float _velocidade;
 
@@ -11,9 +12,19 @@ public class ComponenteMovimento : MonoBehaviour
     [SerializeField, Tooltip("A aceleração do objeto, por padrão 1.")]
     private float _aceleracao = 1.0f;
 
-    private Vector3 _velocidadeAtual = Vector3.zero;
+    [SerializeField, Tooltip("A altura do jogador")]
+    private float _alturaJogador;
+
+    [SerializeField, Tooltip("O atrito do jogador no chão")]
+    private float _atritoNoChao = 1f;
+
+    [System.NonSerialized]
+    public bool noChao;
+
     private Rigidbody _rigidbody;
     private CharacterController _characterController;
+
+    private Vector3 _velocidadeAtual = Vector3.zero;
 
     private bool isJogador; 
 
@@ -34,6 +45,22 @@ public class ComponenteMovimento : MonoBehaviour
         isJogador = TryGetComponent<CharacterController>(out _characterController);
     }
 
+    private void Update()
+    {
+        // Atualiza se o jogador está atualmente no chão com base em um Raycast
+        noChao = Physics.Raycast(transform.position, Vector3.down, _alturaJogador * 0.5f + 0.3f, LayerMask.GetMask("Ground"));
+
+        if (noChao)
+        {
+            // Adiciona atrito ao jogador
+            _rigidbody.linearDamping = _atritoNoChao;
+        } else
+        {
+            // Remove o atrito do jogador
+            _rigidbody.linearDamping = 0;
+        }
+    }
+
     /// <summary>
     /// Movimenta o objeto passado em uma direção dada.
     /// </summary>
@@ -45,6 +72,11 @@ public class ComponenteMovimento : MonoBehaviour
         if (objeto == null)
         {
             Debug.LogError("Objeto não pode ser nulo!");
+            return;
+        }
+
+        if (direcao == Vector3.zero)
+        {
             return;
         }
 
@@ -60,7 +92,6 @@ public class ComponenteMovimento : MonoBehaviour
         // Calcula o Lerp, que é basicamente uma forma de deixar mais suave o movimento com aceleração
         Vector3 direcaoLerp = Vector3.Lerp(_velocidadeAtual, velocidadeAlvo, valorAceleracao);
 
-
         // Movimenta o objeto
         // Se possui o componente de CharacterController, usa ele para o movimento, caso contrário usa o rigid body
         if (isJogador)
@@ -68,7 +99,11 @@ public class ComponenteMovimento : MonoBehaviour
             _characterController.Move(direcaoLerp * Time.deltaTime);
         } else
         {
-            _rigidbody.MovePosition(direcaoLerp * Time.deltaTime);
+            // Verifica se o jogador está no chão e aplica uma força maior caso esteja
+            float multiplicadorAr = noChao ? 1f : 0.4f;
+
+            // Adiciona a força ao objeto, com base na aceleração do jogador; o multiplicadorAr é para que o jogador se movimente mais devagar no ar, e define como um ForceMode.Force para que seja aplicada constantemente
+            _rigidbody.AddForce(direcaoLerp.normalized * _velocidade * 10f * multiplicadorAr, ForceMode.Force);
         }
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
@@ -93,6 +128,10 @@ public class ComponenteMovimento : MonoBehaviour
             return;
         }
 
+        // Reseta a velocidade em Y
+        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0f, _rigidbody.linearVelocity.z);
+
+        // Adiciona uma força para cima, com base na velocidade de pulo, ForceMode.Impulse para que seja aplicada instantaneamente
         _rigidbody.AddForce(Vector3.up * _velocidadePulo, ForceMode.Impulse);
     }
 }
