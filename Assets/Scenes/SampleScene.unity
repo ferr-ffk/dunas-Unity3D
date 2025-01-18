@@ -486,10 +486,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 592063355683131225, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3485616512349206811, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
       propertyPath: m_Name
       value: Jogador
@@ -661,7 +657,7 @@ GameObject:
   - component: {fileID: 2072753033}
   - component: {fileID: 2072753032}
   - component: {fileID: 2072753031}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
