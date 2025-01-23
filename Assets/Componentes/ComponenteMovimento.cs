@@ -93,6 +93,12 @@ public class ComponenteMovimento : MonoBehaviour
             return;
         }
 
-        _rigidbody.AddForce(Vector3.up * _velocidadePulo, ForceMode.Impulse);
+        if (isJogador)
+        {
+            _characterController.Move(Vector3.up * _velocidadePulo, ForceMode.Impulse);
+        } else 
+        {
+            _rigidbody.AddForce(Vector3.up * _velocidadePulo, ForceMode.Impulse);
+        }
     }
 }
