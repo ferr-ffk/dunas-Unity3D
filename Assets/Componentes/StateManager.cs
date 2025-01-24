@@ -7,7 +7,7 @@ public class StateManager : MonoBehaviour
     [NonSerialized]
     public State currentState;
 
-    [SerializeField, Tooltip("A lista de todos os estados possÌveis do contexto (GameObject)")]
+    [SerializeField, Tooltip("A lista de todos os estados poss√≠veis do contexto (GameObject)")]
     public List<State> states = new List<State>();
 
     [SerializeField, Tooltip("O estado inicial do contexto (GameObject).")]
@@ -16,7 +16,7 @@ public class StateManager : MonoBehaviour
     void Start()
     {
         if (initialState == null)
-            throw new NullReferenceException("O estado inicial È nulo! Defina ele para que possa ser gerenciado corretamente.");
+            throw new NullReferenceException("O estado inicial √© nulo! Defina ele para que possa ser gerenciado corretamente.");
 
         currentState = initialState;
 
@@ -26,13 +26,15 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         if (currentState == null)
-            throw new NullReferenceException("O estado inicial n„o foi definido!");
+            throw new NullReferenceException("O estado inicial n√£o foi definido!");
 
         currentState.UpdateState(this);
     }
 
     public void SwitchState(State state)
     {
+        currentState.ExitState(this);
+    
         currentState = state;
 
         state.EnterState(this);
