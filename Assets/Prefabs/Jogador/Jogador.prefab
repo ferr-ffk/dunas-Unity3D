@@ -384,6 +384,7 @@ MonoBehaviour:
   _movimentoJogadorReferencia: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _puloJogadorReferencia: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _pivoCamera: {fileID: 8960358610582933668}
+  _delayCorridaAutomatica: 0.5
 --- !u!114 &930787718500367036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,9 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8f91b8bce0ac4478cc349a78e6ebae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocidade: 10
-  _velocidadePulo: 7
-  _aceleracao: 2
+  _velocidadeDesejada: 6
+  _multiplicadorCorrendo: 2
+  _velocidadePulo: 4
+  _aceleracao: 1.5
   _alturaJogador: 2
   _atritoNoChao: 3
 --- !u!1 &5642940896926041092
