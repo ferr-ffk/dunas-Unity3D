@@ -64,8 +64,6 @@ public class Jogador : MonoBehaviour
             correndo = false;
         }
 
-        Debug.Log(correndo);
-
         // Define a velocidade alvo do jogador de acordo com o estado de correr
         if (correndo)
         {
