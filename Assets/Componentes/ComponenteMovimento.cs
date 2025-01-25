@@ -11,7 +11,7 @@ public class ComponenteMovimento : MonoBehaviour
     /// </summary>
     public float VelocidadeAlvo { get => _velocidadeDesejada; set => _velocidadeDesejada = value; }
 
-    private float _velocidadeInicial;
+    private float velocidadeInicial;
 
     /// <summary>
     /// A velocidade inicial do objeto. É definida automaticamente.
@@ -50,7 +50,6 @@ public class ComponenteMovimento : MonoBehaviour
     private Vector3 _velocidadeAtual = Vector3.zero;
 
     private bool isJogador;
-    private float velocidadeInicial;
 
     private void Start()
     {
@@ -69,7 +68,7 @@ public class ComponenteMovimento : MonoBehaviour
         isJogador = TryGetComponent<CharacterController>(out _characterController);
 
         // Define a velocidade inicial como a velocidade desejada do objeto
-        _velocidadeInicial = _velocidadeDesejada;
+        velocidadeInicial = _velocidadeDesejada;
     }
 
     private void Update()
