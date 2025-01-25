@@ -3,18 +3,27 @@ using UnityEngine;
 public class ComponenteMovimento : MonoBehaviour
 {
 
-    [SerializeField, Tooltip("A velocidade do objeto. Deve ser definida.")]
+    [SerializeField, Tooltip("A velocidade desejada do objeto. Deve ser definida.")]
     private float _velocidadeDesejada;
 
+    /// <summary>
+    /// A velocidade alvo do jogador, que pode ser alterada em tempo de execução.
+    /// </summary>
     public float VelocidadeAlvo { get => _velocidadeDesejada; set => _velocidadeDesejada = value; }
 
     private float _velocidadeInicial;
 
-    public float VelocidadeInicial { get => _velocidadeInicial; set => _velocidadeInicial = value; }
+    /// <summary>
+    /// A velocidade inicial do objeto. É definida automaticamente.
+    /// </summary>
+    public float VelocidadeInicial { get => velocidadeInicial; private set => velocidadeInicial = value; }
 
     [SerializeField, Tooltip("O multiplicador de velocidade ao correr. Por padrão 1,5.")]
     private float _multiplicadorCorrendo = 1.5f;
 
+    /// <summary>
+    /// O multiplicador de velocidade ao correr. Por padrão 1,5.
+    /// </summary>
     public float MultiplicadorCorrendo { get => _multiplicadorCorrendo; set => _multiplicadorCorrendo = value; }
 
     [SerializeField, Tooltip("A velocidade de pulo, sendo pulo o movimento em direção Y+. Deve ser definida.")]
@@ -41,6 +50,7 @@ public class ComponenteMovimento : MonoBehaviour
     private Vector3 _velocidadeAtual = Vector3.zero;
 
     private bool isJogador;
+    private float velocidadeInicial;
 
     private void Start()
     {
