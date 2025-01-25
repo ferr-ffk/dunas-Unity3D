@@ -4,7 +4,18 @@ public class ComponenteMovimento : MonoBehaviour
 {
 
     [SerializeField, Tooltip("A velocidade do objeto. Deve ser definida.")]
-    private float _velocidade;
+    private float _velocidadeDesejada;
+
+    public float VelocidadeAlvo { get => _velocidadeDesejada; set => _velocidadeDesejada = value; }
+
+    private float _velocidadeInicial;
+
+    public float VelocidadeInicial { get => _velocidadeInicial; set => _velocidadeInicial = value; }
+
+    [SerializeField, Tooltip("O multiplicador de velocidade ao correr. Por padrão 1,5.")]
+    private float _multiplicadorCorrendo = 1.5f;
+
+    public float MultiplicadorCorrendo { get => _multiplicadorCorrendo; set => _multiplicadorCorrendo = value; }
 
     [SerializeField, Tooltip("A velocidade de pulo, sendo pulo o movimento em direção Y+. Deve ser definida.")]
     private float _velocidadePulo;
@@ -21,12 +32,15 @@ public class ComponenteMovimento : MonoBehaviour
     [System.NonSerialized]
     public bool noChao;
 
+    [System.NonSerialized]
+    public float tempoAndando;
+
     private Rigidbody _rigidbody;
     private CharacterController _characterController;
 
     private Vector3 _velocidadeAtual = Vector3.zero;
 
-    private bool isJogador; 
+    private bool isJogador;
 
     private void Start()
     {
@@ -43,6 +57,9 @@ public class ComponenteMovimento : MonoBehaviour
 
         // Pega o CharacterController do objeto, caso exista
         isJogador = TryGetComponent<CharacterController>(out _characterController);
+
+        // Define a velocidade inicial como a velocidade desejada do objeto
+        _velocidadeInicial = _velocidadeDesejada;
     }
 
     private void Update()
@@ -77,14 +94,20 @@ public class ComponenteMovimento : MonoBehaviour
 
         if (direcao == Vector3.zero)
         {
+            // Reseta o tempo de andar
+            tempoAndando = 0;
+
             return;
         }
+
+        // Atualiza o tempo que o jogador está andando
+        tempoAndando += Time.deltaTime;
 
         // Transforma o vetor de movimento com base na direção dele (se esta existir), para que o movimento esteja sempre alinhado com a câmera
         Vector3 direcaoMovimento = forward * direcao;
 
         // Calcula a direção desejada de movimento
-        Vector3 velocidadeAlvo = direcaoMovimento * _velocidade;
+        Vector3 velocidadeAlvo = direcaoMovimento * _velocidadeDesejada;
 
         // Calcula o valor da aceleração para ser utilizada no Lerp
         float valorAceleracao = 1 - Mathf.Exp(-_aceleracao * Time.deltaTime);
@@ -103,7 +126,7 @@ public class ComponenteMovimento : MonoBehaviour
             float multiplicadorAr = noChao ? 1f : 0.4f;
 
             // Adiciona a força ao objeto, com base na aceleração do jogador; o multiplicadorAr é para que o jogador se movimente mais devagar no ar, e define como um ForceMode.Force para que seja aplicada constantemente
-            _rigidbody.AddForce(direcaoLerp.normalized * _velocidade * 10f * multiplicadorAr, ForceMode.Force);
+            _rigidbody.AddForce(direcaoLerp.normalized * _velocidadeDesejada * 10f * multiplicadorAr, ForceMode.Force);
         }
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
