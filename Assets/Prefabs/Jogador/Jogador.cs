@@ -33,26 +33,25 @@ public class Jogador : MonoBehaviour
     {
         if (_componenteMovimento == null)
         {
-            Debug.LogError("O componente de movimento n„o foi definido corretamente!");
+            Debug.LogError("O componente de movimento n√£o foi definido corretamente!");
 
             return;
         }
 
-        // ObtÈm o vetor 2D de direÁ„o a partir do input
+        // Obt√©m o vetor 2D de dire√ß√£o a partir do input
         Vector2 direcaoJoystick = _movimentoJogadorReferencia.action.ReadValue<Vector2>();
 
         // Cria um vetor 3D para movimentar apenas no x e z (sendo Y a vertical)
         Vector3 direcao = new(direcaoJoystick.x, 0, direcaoJoystick.y);
 
-        // Utiliza a rotaÁ„o que a c‚mera est· apontando, e usa para que o jogador se movimente de acordo com ela
+        // Utiliza a rota√ß√£o que a c√¢mera est√° apontando, e usa para que o jogador se movimente de acordo com ela
         Quaternion rotacaoCameraApontando = Quaternion.Euler(0, _camera.transform.eulerAngles.y, 0);
 
-        float tempoAndando = _componenteMovimento.tempoAndando;
         bool haMovimento = direcao.magnitude > 0;
-        bool corridaAutomaticaAtivada = tempoAndando > _delayCorridaAutomatica;
+        bool corridaAutomaticaAtivada = _componenteMovimento.tempoAndando > _delayCorridaAutomatica;
 
-        // Verifica se o jogador est· andando e se o tempo de andar È maior que o delay
-        // Ativa a corrida autom·tica ao andar pelo tempo necess·rio
+        // Verifica se o jogador est√° andando e se o tempo de andar √© maior que o delay
+        // Ativa a corrida autom√°tica ao andar pelo tempo necess√°rio
         if (haMovimento && corridaAutomaticaAtivada)
         {
             correndo = true;
@@ -67,7 +66,7 @@ public class Jogador : MonoBehaviour
         // Define a velocidade alvo do jogador de acordo com o estado de correr
         if (correndo)
         {
-            // ObtÈm o multiplicador de correr do componente de movimento e atualiza a velocidade alvo para correr
+            // Obt√©m o multiplicador de correr do componente de movimento e atualiza a velocidade alvo para correr
             _componenteMovimento.VelocidadeAlvo = _componenteMovimento.MultiplicadorCorrendo * _componenteMovimento.VelocidadeInicial;
         } else
         {
@@ -75,7 +74,7 @@ public class Jogador : MonoBehaviour
             _componenteMovimento.VelocidadeAlvo = _componenteMovimento.VelocidadeInicial;
         }
 
-        // Utiliza o mÈtodo do componente de movimento e movimenta o jogador
+        // Utiliza o m√©todo do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
