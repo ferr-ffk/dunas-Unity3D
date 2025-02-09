@@ -22,10 +22,14 @@ public class Jogador : MonoBehaviour
 
     private GameObject _camera;
 
+    private Animator _animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -81,9 +85,11 @@ public class Jogador : MonoBehaviour
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
         bool noChao = _componenteMovimento.noChao;
 
-        if (botaoPularPressionado && noChao)
+        if (botaoPularPressionado && true)
         {
             _componenteMovimento.Pular(gameObject);
+
+            _animator.Play("Base Layer.SentadoLamberPata");
         }
     }
 }
