@@ -97,7 +97,11 @@ public class Jogador : MonoBehaviour
         if (haMovimento)
         {
             // A multiplicação de vetores é o segredo, faz com que a rotação da direção seja rotacionada com base no alinhamento da câmera
-            _armature.transform.rotation = Quaternion.LookRotation(direcao) * rotacaoCameraApontando;
+            Quaternion rotacaoDesejada = Quaternion.LookRotation(direcao) * rotacaoCameraApontando;
+
+            // Interpola a rotação, deixando ela mais suave
+            // Multiplica por um número grandde pra que ela seja *quase* instantânea
+            _armature.transform.rotation = Quaternion.Slerp(_armature.transform.rotation, rotacaoDesejada, Time.deltaTime * 10);
         }
 
         // Utiliza o método do componente de movimento e movimenta o jogador
