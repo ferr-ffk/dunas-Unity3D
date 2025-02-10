@@ -92,6 +92,14 @@ public class Jogador : MonoBehaviour
             _animator.SetBool("Andando", false);
         }
 
+        // Movimenta a armature pra que o modelo vire pra direção que esteja andando
+        // ISSO DEU CERTO NA TERCEIRA TENTATIVA MEREÇO UM TROFÉU
+        if (haMovimento)
+        {
+            // A multiplicação de vetores é o segredo, faz com que a rotação da direção seja rotacionada com base no alinhamento da câmera
+            _armature.transform.rotation = Quaternion.LookRotation(direcao) * rotacaoCameraApontando;
+        }
+
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
