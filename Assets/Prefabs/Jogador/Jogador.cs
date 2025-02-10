@@ -18,6 +18,9 @@ public class Jogador : MonoBehaviour
     [SerializeField]
     private float _delayCorridaAutomatica = 0.5f;
 
+    [SerializeField]
+    private GameObject _armature;
+
     private bool correndo = false;
 
     private GameObject _camera;
@@ -73,23 +76,30 @@ public class Jogador : MonoBehaviour
         {
             // Obtém o multiplicador de correr do componente de movimento e atualiza a velocidade alvo para correr
             _componenteMovimento.VelocidadeAlvo = _componenteMovimento.MultiplicadorCorrendo * _componenteMovimento.VelocidadeInicial;
-        } else
+        }
+        else
         {
             // Reseta a velocidade alvo para a velocidade inicial, sem o multiplicador de velocidade ao correr
             _componenteMovimento.VelocidadeAlvo = _componenteMovimento.VelocidadeInicial;
+        }
+
+        if (haMovimento)
+        {
+            _animator.SetBool("Andando", true);
+        }
+        else
+        {
+            _animator.SetBool("Andando", false);
         }
 
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
-        bool noChao = _componenteMovimento.noChao;
 
         if (botaoPularPressionado && true)
         {
             _componenteMovimento.Pular(gameObject);
-
-            _animator.Play("Base Layer.SentadoLamberPata");
         }
     }
 }
