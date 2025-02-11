@@ -108,6 +108,8 @@ public class ComponenteMovimento : MonoBehaviour
             // Reseta o tempo de andar
             tempoAndando = 0;
 
+            velocidadeAtual = Vector3.zero;
+
             return;
         }
 
