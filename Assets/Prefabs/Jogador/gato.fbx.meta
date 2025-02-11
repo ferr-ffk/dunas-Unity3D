@@ -60,9 +60,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: "Padr\xE3o"
-      takeName: "Padr\xE3o"
-      internalID: -3211380592334601622
+      name: Idle
+      takeName: Idle
+      internalID: -3471898873763908879
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
