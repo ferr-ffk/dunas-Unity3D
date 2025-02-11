@@ -49,7 +49,7 @@ public class ComponenteMovimento : MonoBehaviour
     private CharacterController _characterController;
 
     [System.NonSerialized]
-    public Vector3 _velocidadeAtual = Vector3.zero;
+    public Vector3 velocidadeAtual = Vector3.zero;
 
     private bool isJogador;
 
@@ -124,7 +124,7 @@ public class ComponenteMovimento : MonoBehaviour
         float valorAceleracao = 1 - Mathf.Exp(-_aceleracao * Time.deltaTime);
 
         // Calcula o Lerp, que é basicamente uma forma de deixar mais suave o movimento com aceleração
-        Vector3 direcaoLerp = Vector3.Lerp(_velocidadeAtual, velocidadeAlvo, valorAceleracao);
+        Vector3 direcaoLerp = Vector3.Lerp(velocidadeAtual, velocidadeAlvo, valorAceleracao);
 
         // Movimenta o objeto
         // Se possui o componente de CharacterController, usa ele para o movimento, caso contrário usa o rigid body
@@ -141,7 +141,7 @@ public class ComponenteMovimento : MonoBehaviour
         }
 
         // Atualiza a variável local para o valor mais recente da velocidade do objeto
-        _velocidadeAtual = velocidadeAlvo;
+        velocidadeAtual = velocidadeAlvo;
     }
 
     /// <summary>
