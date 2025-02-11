@@ -3,22 +3,19 @@ using UnityEngine.InputSystem;
 
 public class Jogador : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Tooltip("O componente de movimento deste jogador.")]
     private ComponenteMovimento _componenteMovimento;
 
-    [SerializeField]
+    [SerializeField, Tooltip("A ação de input definida para movimento.")]
     private InputActionReference _movimentoJogadorReferencia;
 
-    [SerializeField]
+    [SerializeField, Tooltip("A ação de input definida para pulo.")]
     private InputActionReference _puloJogadorReferencia;
 
-    [SerializeField]
-    private GameObject _pivoCamera;
-
-    [SerializeField]
+    [SerializeField, Tooltip("O tempo em segundos para que a corrida seja automaticamente ativada.")]
     private float _delayCorridaAutomatica = 0.5f;
 
-    [SerializeField]
+    [SerializeField, Tooltip("A armature do jogador.")]
     private GameObject _armature;
 
     private bool correndo = false;
@@ -27,7 +24,6 @@ public class Jogador : MonoBehaviour
 
     private Animator _animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -35,7 +31,6 @@ public class Jogador : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_componenteMovimento == null)
@@ -82,14 +77,8 @@ public class Jogador : MonoBehaviour
             _componenteMovimento.VelocidadeAlvo = _componenteMovimento.VelocidadeInicial;
         }
 
-        if (haMovimento)
-        {
-            _animator.SetBool("Andando", true);
-        }
-        else
-        {
-            _animator.SetBool("Andando", false);
-        }
+        // Se há movimento, ativa a animação de andar
+        _animator.SetBool("Andando", haMovimento);
 
         // Movimenta a armature pra que o modelo vire pra direção que esteja andando
         // ISSO DEU CERTO NA TERCEIRA TENTATIVA MEREÇO UM TROFÉU
@@ -107,14 +96,13 @@ public class Jogador : MonoBehaviour
         // Velocidade > 4 : Animação de corrida, caso contrário, animação de andar
         _animator.SetFloat("Velocidade", _componenteMovimento.velocidadeAtual.magnitude);
 
-        Debug.Log(_componenteMovimento.velocidadeAtual);
-
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
+        // Verifica se o botão de pular foi pressionado
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
 
-        if (botaoPularPressionado && true)
+        if (botaoPularPressionado)
         {
             _componenteMovimento.Pular(gameObject);
         }
