@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ComponenteMovimento : MonoBehaviour
@@ -47,7 +48,8 @@ public class ComponenteMovimento : MonoBehaviour
     private Rigidbody _rigidbody;
     private CharacterController _characterController;
 
-    private Vector3 _velocidadeAtual = Vector3.zero;
+    [System.NonSerialized]
+    public Vector3 _velocidadeAtual = Vector3.zero;
 
     private bool isJogador;
 
