@@ -103,6 +103,12 @@ public class Jogador : MonoBehaviour
             _armature.transform.rotation = Quaternion.Slerp(_armature.transform.rotation, rotacaoDesejada, Time.deltaTime * 10);
         }
 
+        // Define a velocidade para uso do animador
+        // Velocidade > 4 : Animação de corrida, caso contrário, animação de andar
+        _animator.SetFloat("Velocidade", _componenteMovimento.velocidadeAtual.magnitude);
+
+        Debug.Log(_componenteMovimento.velocidadeAtual);
+
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
