@@ -102,7 +102,6 @@ MonoBehaviour:
   _componenteMovimento: {fileID: 8485169205642267369}
   _movimentoJogadorReferencia: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _puloJogadorReferencia: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _pivoCamera: {fileID: 0}
   _delayCorridaAutomatica: 2
   _armature: {fileID: 5112689392581090046}
 --- !u!114 &8485169205642267369
@@ -174,8 +173,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7415545066808095845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.053721838, y: 0.76133525, z: -0.06360957, w: 0.6429902}
-  m_LocalPosition: {x: -1.1689768, y: 0.19952303, z: 0.19843286}
+  m_LocalRotation: {x: 0.08902045, y: 0.7566818, z: -0.105405055, w: 0.6390601}
+  m_LocalPosition: {x: -1.2803695, y: 0.36897087, z: 0.21734172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -250,11 +249,11 @@ MonoBehaviour:
       Radius: 0.3
       Height: 0.62
     Center:
-      Radius: 1.2
-      Height: -0.5
+      Radius: 1.42
+      Height: -0.39
     Bottom:
-      Radius: 0.8
-      Height: -0.8
+      Radius: 0.7
+      Height: -0.6
     SplineCurvature: 1
   RecenteringTarget: 2
   HorizontalAxis:
@@ -402,8 +401,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483479673155184766}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.053721838, y: 0.76133525, z: -0.06360957, w: 0.6429902}
-  m_LocalPosition: {x: -1.1689768, y: 0.19952303, z: 0.19843286}
+  m_LocalRotation: {x: 0.08902045, y: 0.7566818, z: -0.105405055, w: 0.6390601}
+  m_LocalPosition: {x: -1.2803695, y: 0.36897087, z: 0.21734172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
