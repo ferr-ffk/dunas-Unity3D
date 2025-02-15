@@ -89,7 +89,7 @@ public class Jogador : MonoBehaviour
 
             // Interpola a rotação, deixando ela mais suave
             // Multiplica por um número grandde pra que ela seja *quase* instantânea
-            _armature.transform.rotation = Quaternion.Slerp(_armature.transform.rotation, rotacaoDesejada, Time.deltaTime * 10);
+            _armature.transform.rotation = Quaternion.Slerp(_armature.transform.rotation, rotacaoDesejada, Time.deltaTime * 8);
         }
 
         // Define a velocidade para uso do animador
