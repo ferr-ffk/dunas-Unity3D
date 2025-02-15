@@ -96,6 +96,13 @@ public class Jogador : MonoBehaviour
         // Velocidade > 4 : Animação de corrida, caso contrário, animação de andar
         _animator.SetFloat("Velocidade", _componenteMovimento.velocidadeAtual.magnitude);
 
+        // Define o multiplicador de andar para a animação, baseado na velocidade atual do jogador
+        // Faz uma regra de 3 para definir quanto o jogador esta andando em relação a velocidade alvo
+        float multiplicadorAndando = _componenteMovimento.velocidadeAtual.magnitude / _componenteMovimento.VelocidadeAlvo;
+
+        // Define o multiplicador de andar para a animação
+        _animator.SetFloat("MultiplicadorAndando", multiplicadorAndando);
+
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
