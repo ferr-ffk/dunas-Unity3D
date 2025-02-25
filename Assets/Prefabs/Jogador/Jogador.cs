@@ -106,6 +106,11 @@ public class Jogador : MonoBehaviour
         // Utiliza o método do componente de movimento e movimenta o jogador
         _componenteMovimento.Movimentar(gameObject, direcao, rotacaoCameraApontando);
 
+        VerificarPulo();
+    }
+
+    private void VerificarPulo()
+    {
         // Verifica se o botão de pular foi pressionado
         bool botaoPularPressionado = _puloJogadorReferencia.action.triggered;
 
