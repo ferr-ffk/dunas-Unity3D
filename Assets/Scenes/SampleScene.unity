@@ -358,6 +358,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023910100}
     m_Modifications:
+    - target: {fileID: 576383309930532058, guid: ff5692597de6e9346a31d15c7d4fbc9a, type: 3}
+      propertyPath: m_UseIsolatedInputActions
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576383309930532058, guid: ff5692597de6e9346a31d15c7d4fbc9a, type: 3}
+      propertyPath: m_PointerDownAction.m_Name
+      value: Pointer Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 576383309930532058, guid: ff5692597de6e9346a31d15c7d4fbc9a, type: 3}
+      propertyPath: m_PointerMoveAction.m_Name
+      value: Pointer Move
+      objectReference: {fileID: 0}
     - target: {fileID: 2552648616387754933, guid: ff5692597de6e9346a31d15c7d4fbc9a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
