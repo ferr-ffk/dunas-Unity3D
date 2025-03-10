@@ -1339,17 +1339,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jogador
       objectReference: {fileID: 0}
-    - target: {fileID: 5084595556789505583, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[0].Input.Gain
-      value: 200
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_HDR
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5084595556789505583, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.Gain
-      value: -200
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_AllowMSAA
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5084595556789505583, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[2].Input.Gain
-      value: 200
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: field of view
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_FocalLength
+      value: 17.158201
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_SensorSize.x
+      value: 21.946
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_SensorSize.y
+      value: 16.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200691870858318822, guid: 0d2a83da27bb65a4b85069a7d777a463, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
